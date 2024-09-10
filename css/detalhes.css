@@ -84,10 +84,51 @@
 }
 
 .btn-rates {
-    border-radius: 1px solid;
+    border: 1px solid #cbcbcb;
+    border-radius: 20px;
+    padding: 5px 10px;
+    background: none;
+    margin-right: 5px;
+    width: 80px;
+    font-size: 16px;
+
 }
 
+.mdi-thumb-up {
+    color: var(--verde);
+}
 
+.color-gray {
+    color: gray;
+}
 
+.flex-40 {
+    flex: 40%;
+}
+
+.flex-60 {
+    flex: 60%;
+}
+
+.riscado {
+    text-decoration: line-through;
+}
+
+.pricing {
+    font-weight: 800;
+    font-size: 22px;
+}
+
+.add-cart {
+    width: 90%;
+    height: 50px;
+    border-radius: 15px;
+    border: none;
+    background: var(--verde);
+    color: var(--branco);
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 800;
+}
 
 
