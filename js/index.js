@@ -1,29 +1,43 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
+fetch('js/backend.json')
+    .then(response => response.json())
+    .then(data => {
+        // SALVAR DADOS VINDOS DO BACK-END LOCALMENTE
+        // VAMOS UTILIZAR O LOCALSTORAGE
+        localStorage.setItem('produtos', JSON.stringify());
+        console.log('Dados dos produtos Salvos no LocalStorage');
 
-// Wait for the deviceready event before using any of Cordova's device APIs.
-// See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-document.addEventListener('deviceready', onDeviceReady, false);
+        setTimeout(() => {
+            $("#produtos").empty();
 
-function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
+            data.forEach(produto => {
+                var produtoHTML = `<div class="item-card">
+                                <a data-id="${produto.id}" href="/detalhes/" class="item">
+                                    <div class="img-container">
+                                        <img src=${produto.imagem}>
+                                    </div>
+                                    <div class="nome-rating color-gray">
+                                        <span>${produto.nome}</span>
+                                        <span class="bold margin-right">
+                                            <i class="mdi mdi-star"></i>
+                                            ${produto.rating}
+                                        </span>
+                                    </div>
+                                    <div class="price">
+                                        ${produto.preco_promocional.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                                    </div>
+                                </a>
+                            </div>`
 
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
-}
+                $("#produtos").append(produtoHTML);
+
+                $(".item").on('click', function () {
+                    var id = $(this).attr('data-id');
+                    localStorage.setItem('detalhe', id)
+                    app.views.main.router.navigate('/detalhes/')
+                });
+            });
+        }, 1000);
+
+    })
+
+    .catch(error => console.error('Erro ao fazer fetch dos dados:' + error));

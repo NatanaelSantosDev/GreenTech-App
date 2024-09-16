@@ -24,7 +24,8 @@ var app = new Framework7({
       on: {
       pageBeforeIn: function (event, page) {
         // fazer algo antes da página ser exibida
-        app.views.main.router.navigate('/carrinho/');
+        app.views.main.router.navigate('/index/');
+        $.getScript('js/index.js');
         $("#menuPrincipal").show("fast");
         var swiper = new Swiper(".mySwiper", {
           slidesPerView: 1,
@@ -147,6 +148,30 @@ var app = new Framework7({
       path: '/detalhes/',
       url: 'detalhes.html',
       animate: false,
+      on: {
+      pageBeforeIn: function (event, page) {
+      // fazer algo antes da página ser exibida
+      $("#menuPrincipal").hide("fast");
+      },
+      pageAfterIn: function (event, page) {
+      // fazer algo depois da página ser exibida
+      },
+      pageInit: function (event, page) {
+      // fazer algo quando a página for inicializada
+      $.getScript('js/detalhes.js');
+      },
+      pageBeforeRemove: function (event, page) {
+      // fazer algo antes da página ser removida do DOM
+      },
+      }
+    },
+
+    {
+      path: '/carrinho/',
+      url: 'carrinho.html',
+      Options: {
+        transition: 'f7-push'
+      },
       on: {
       pageBeforeIn: function (event, page) {
       // fazer algo antes da página ser exibida
