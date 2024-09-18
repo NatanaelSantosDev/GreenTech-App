@@ -3,7 +3,7 @@ fetch('js/backend.json')
     .then(data => {
         // SALVAR DADOS VINDOS DO BACK-END LOCALMENTE
         // VAMOS UTILIZAR O LOCALSTORAGE
-        localStorage.setItem('produtos', JSON.stringify());
+        localStorage.setItem('produtos', JSON.stringify(data));
         console.log('Dados dos produtos Salvos no LocalStorage');
 
         setTimeout(() => {
